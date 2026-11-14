@@ -86,6 +86,9 @@ a:hover{color:var(--color-accent-900)}
         <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,520px),1fr))">
           <div style="position:relative;min-height:340px;background:var(--color-neutral-200)">
+            <sc-if value="{{ w.hasVideo }}" hint-placeholder-val="{{ false }}">
+              <iframe src="{{ w.videoSrc }}" style="position:absolute;inset:0;width:100%;height:100%;border:none" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </sc-if>
             <sc-if value="{{ w.hasImage }}" hint-placeholder-val="{{ false }}">
               <div role="img" aria-label="{{ w.title }}" style="position:absolute;inset:0;background-image:{{ w.bgImage }};background-size:cover;background-position:center"></div>
             </sc-if>
@@ -143,9 +146,12 @@ a:hover{color:var(--color-accent-900)}
       <sc-for list="{{ others }}" as="w" hint-placeholder-count="3">
         <article class="blueprint" style="display:flex;flex-direction:column">
           <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
-          <div style="position:relative;aspect-ratio:16/10;background:var(--color-neutral-200);border-bottom:1px solid var(--color-divider)">
+          <div style="position:relative;aspect-ratio:16/9;background:var(--color-neutral-200);border-bottom:1px solid var(--color-divider)">
             <sc-if value="{{ w.hasImage }}" hint-placeholder-val="{{ false }}">
               <div role="img" aria-label="{{ w.title }}" style="position:absolute;inset:0;background-image:{{ w.bgImage }};background-size:cover;background-position:center"></div>
+            </sc-if>
+            <sc-if value="{{ w.hasVideo }}" hint-placeholder-val="{{ false }}">
+              <iframe src="{{ w.videoSrc }}" style="position:absolute;inset:0;width:100%;height:100%;border:none" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             </sc-if>
             <div style="position:absolute;top:12px;left:12px;background:var(--color-bg);padding:5px 9px;font-size:11px;letter-spacing:.1em;color:var(--color-accent-800)">{{ w.event }}</div>
           </div>
@@ -188,7 +194,10 @@ a:hover{color:var(--color-accent-900)}
       <sc-for list="{{ researchItems }}" as="w" hint-placeholder-count="1">
         <article class="blueprint" style="display:flex;flex-direction:column">
           <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
-                    <div style="position:relative;aspect-ratio:16/10;background:var(--color-neutral-200);border-bottom:1px solid var(--color-divider);overflow:hidden">
+                    <div style="position:relative;aspect-ratio:16/9;background:var(--color-neutral-200);border-bottom:1px solid var(--color-divider);overflow:hidden">
+            <sc-if value="{{ w.hasVideo }}" hint-placeholder-val="{{ false }}">
+              <iframe src="{{ w.videoSrc }}" style="position:absolute;inset:0;width:100%;height:100%;border:none" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </sc-if>
             <sc-if value="{{ w.hasImages }}" hint-placeholder-val="{{ false }}">
               <div style="display:flex;width:100%;height:100%">
                 <div style="width:50%;height:100%;background-image:url('{{ w.image1 }}');background-size:cover;background-position:center"></div>
@@ -318,7 +327,7 @@ const WORKS = [
     team: 5, teamLabel: '5名',
     tech: ['Unity', 'C#', 'Arduino', 'シリアル通信'],
     image: 'https://gdc.mikomiko-night.workers.dev/assets/world/village.jpg',
-    links: [{ label: 'プロジェクトサイト', url: 'https://gdc.mikomiko-night.workers.dev' }, { label: 'GitHub', url: 'https://github.com/Fialuxe/MouthOfGod_System' }, { label: '制作の様子', url: 'https://gdc.mikomiko-night.workers.dev/making.html' }] },
+    video: 'https://www.youtube.com/embed/_4pGQyCq0B0?si=dP-0BBp1DhX87zDp', links: [{ label: 'プロジェクトサイト', url: 'https://gdc.mikomiko-night.workers.dev' }, { label: 'GitHub', url: 'https://github.com/Fialuxe/MouthOfGod_System' }, { label: '制作の様子', url: 'https://gdc.mikomiko-night.workers.dev/making.html' }] },
   { id: 'mealbeback', start: '2026-06-06', end: '2026-09-07', period: '2026.06.06 – 09.07', kind: 'コンテスト', event: 'IVRC 2026 · 審査通過・会場展示',
     title: 'MealBeBack', tagline: '咀嚼を、逆再生する食育体験',
     summary: '『日本書紀』の保食神（うけもちのかみ）は、口から飯や魚、獣を生み出して人をもてなしたと語られる。本企画では「口から食が生まれる」情景と、咀嚼の逆再生表現を重ね合わせ、食の背後にある生命に身体を通して触れる新たな食育体験を構築する。咀嚼に応じて口内の食べ物が物理的に復元・増加し、その原材料へと巻き戻り、体験者の口から生み出される。クイズ形式の体験として実装することで楽しめる食育コンテンツを目指す。',
@@ -326,19 +335,19 @@ const WORKS = [
     tech: ['Unity', 'C#', 'Arduino', 'シリアル通信'],
     team: 5, teamLabel: '5名',
     image: 'https://img.youtube.com/vi/YFNzpdmrfdw/maxresdefault.jpg',
-    links: [{ label: 'YouTube', url: 'https://www.youtube.com/watch?v=YFNzpdmrfdw' }, { label: 'GitHub', url: 'https://github.com/Fialuxe/MealBeBack' }] },
+    video: 'https://www.youtube.com/embed/YFNzpdmrfdw?si=vSsKRi0gFKcJ4emM', links: [{ label: 'YouTube', url: 'https://www.youtube.com/watch?v=YFNzpdmrfdw' }, { label: 'GitHub', url: 'https://github.com/Fialuxe/MealBeBack' }] },
   { id: 'madeinuec', start: '2026-02-13', end: '2026-02-28', period: '2026.02.13 – 02.28', kind: 'サークル', event: '大学サークル',
     title: 'メイドインUEC', tagline: 'オムニバス形式の数秒勝負',
     summary: 'ごくわずかな制限時間でプレイするミニゲームが集合した、ハイスピードアクションゲーム。',
     tasks: { plan: ['大学のサークル・コミュニティで企画されたプロジェクトに参加し、その構成要素の一つであるミニゲーム「ウィンドウ」を企画しました。グループを結成しました。'], impl: ['仕事の分割、問題の明文化、進捗の確認、運営との相談を行い、プロトタイプを作成しました。'] },
     team: 30, teamLabel: '30名以上',
-    tech: ['Unity', 'C#'], image: 'https://peachamomomo.github.io/images/made_in_uec.png', links: [{ label: 'GitHub', url: 'https://github.com/kate1081021/made-in-UEC' }] },
+    tech: ['Unity', 'C#'], video: '', image: 'https://peachamomomo.github.io/images/made_in_uec.png', links: [{ label: 'GitHub', url: 'https://github.com/kate1081021/made-in-UEC' }] },
   { id: 'mediamonster', start: '2024-12-01', end: '2025-02-19', period: '2024.12 – 2025.02', kind: '授業', event: '授業課題',
     title: 'MEDIA MONSTER', tagline: 'ドットモンスターが戦う、通信コマンドバトル',
     summary: 'IPアドレスとポート番号指定による通信コマンドバトルゲーム',
     tasks: { plan: ['「ターン制でドット絵にしたい」というアイデアをもとに、通信方式の設定や Java で実装するうえでの課題をブラッシュアップし、具体的な実装段階まで落とし込みました。'], design: ['ターン制の通信処理について、ターンの遷移や処理の流れを設計しました。'], impl: ['通信処理を実装しました。その他の動作確認を行いました。'] },
     team: 3, teamLabel: '3名',
-    tech: ['Java'], image: 'https://peachamomomo.github.io/images/media_monster.png', links: [] },
+    tech: ['Java'], video: '', image: 'https://peachamomomo.github.io/images/media_monster.png', links: [] },
 ];
 
 // ===== 研究の追加・編集はここ =====
@@ -346,7 +355,7 @@ const RESEARCH = [
   { id: 'haptics', period: '2026.04 –', kind: '研究室', event: '広田研究室',
     title: '振動刺激の遷移による足裏への摩擦感提示', tagline: '振動刺激で足裏に摩擦感を提示する',
     summary: '振動刺激で足裏に摩擦感を提示する研究を通じて、次の技術と知見を身につけました。',
-    image: '', images: ['https://peachamomomo.github.io/images/research_device.jpg', 'https://peachamomomo.github.io/images/research_unity.png'], tech: ['Unity', 'C#', 'Arduino', 'SteamVR', 'Vive Tracker'],
+    video: '', image: '', images: ['https://peachamomomo.github.io/images/research_device.jpg', 'https://peachamomomo.github.io/images/research_unity.png'], tech: ['Unity', 'C#', 'Arduino', 'SteamVR', 'Vive Tracker'],
     tasks: { plan: [], design: ['振動子を駆動する回路の設計・製作、回路と Unity をつなぐ信号制御の設計'],
       impl: ['VR で動作する Unity アプリケーションの開発。Vive Tracker を用いた位置計測'],
       show: [] }, links: [] },
@@ -374,7 +383,8 @@ class Component extends DCLogic {
         fg: on ? 'var(--color-accent-800)' : N, weight: on ? 600 : 400, colBg: on ? 'transparent' : 'var(--color-neutral-100)' };
     });
     const base = w => ({ ...w, slotId: 'work-' + w.id, phaseCols: phaseCols(w),
-      hasImage: !!w.image, noImage: !w.image, bgImage: w.image ? `url("${w.image}")` : 'none', hasLinks: w.links.length > 0,
+      hasImage: !!w.image && !w.video, noImage: !w.image && !w.video, bgImage: w.image ? `url("${w.image}")` : 'none',
+      hasVideo: !!w.video, videoSrc: w.video || '', hasLinks: w.links.length > 0,
       taskRows: PHASES.flatMap(([k, name]) => (w.tasks[k] || []).map(task => ({ phase: name, task }))) });
 
     const featured = WORKS.slice(0, 2).map(w => ({ ...base(w), hasAreas: !!w.areas,
@@ -383,7 +393,7 @@ class Component extends DCLogic {
         const others = WORKS.slice(2).map(base);
     const researchItems = RESEARCH.map(r => ({
       ...base(r),
-      hasImages: r.images && r.images.length > 1,
+      hasImages: !r.video && r.images && r.images.length > 1,
       image1: r.images ? r.images[0] : '',
       image2: r.images ? r.images[1] : '',
     }));
