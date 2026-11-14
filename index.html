@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="./support.js"></script>
 <script src="_ds/industry-ede87c06-bd1c-4000-a67b-d01afbee25f5/_ds_bundle.js"></script>
-<script src="./image-slot.js"></script>
 </head>
 <body>
 <x-dc>
@@ -40,7 +39,7 @@ a:hover{color:var(--color-accent-900)}
   <div style="display:flex;flex-direction:column;gap:20px">
     <div style="font-size:13px;letter-spacing:.14em;color:var(--color-accent-700)">電気通信大学 · VR／ゲーム制作</div>
     <h1 style="font-size:clamp(52px,7.4vw,96px);line-height:1;letter-spacing:-.01em">森本 藍衣</h1>
-<p style="margin:0;font-size:16px;line-height:1.8;color:var(--color-neutral-800);max-width:520px;text-wrap:pretty">チームでのゲーム・VR 制作において、企画・設計・実装・展示の各工程に携わってきました。研究では、振動による触覚提示をハードウェアと Unity の両面から扱っています。</p>
+<p style="margin:0;font-size:16px;line-height:1.8;color:var(--color-neutral-800);max-width:520px;text-wrap:pretty">チームでのゲーム・VR 制作において、企画・設計・実装・展示の各工程に携わってきました。卒業研究として、振動による触覚提示について調べています。基盤設計と Unity 制御を組み合わせた実験環境を構築中です。</p>
     <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:4px">
       <a href="#work" class="btn btn-primary blueprint" style="color:var(--color-bg);text-decoration:none;padding:10px 18px;font-size:15px"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>作品を見る ↓</a>
       <a href="#contact" class="btn btn-secondary" style="text-decoration:none;padding:10px 18px;font-size:15px">連絡する</a>
@@ -49,7 +48,7 @@ a:hover{color:var(--color-accent-900)}
   <figure class="blueprint" style="margin:0">
     <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
     <div style="position:relative;aspect-ratio:4/5;max-height:540px;width:100%">
-      <image-slot id="portrait" shape="rect" placeholder="ポートレート写真をドロップ"></image-slot>
+      <div style="position:absolute;inset:0;background:var(--color-neutral-200)"></div>
     </div>
   </figure>
 </section>
@@ -90,9 +89,7 @@ a:hover{color:var(--color-accent-900)}
             <sc-if value="{{ w.hasImage }}" hint-placeholder-val="{{ false }}">
               <div role="img" aria-label="{{ w.title }}" style="position:absolute;inset:0;background-image:{{ w.bgImage }};background-size:cover;background-position:center"></div>
             </sc-if>
-            <sc-if value="{{ w.noImage }}" hint-placeholder-val="{{ true }}">
-              <image-slot id="{{ w.slotId }}" shape="rect" placeholder="作品画像をドロップ"></image-slot>
-            </sc-if>
+            <div style="position:absolute;inset:0;background:var(--color-neutral-200)"></div>
             <div style="position:absolute;top:16px;left:16px;background:var(--color-bg);padding:6px 10px;font-size:11px;letter-spacing:.12em;color:var(--color-accent-800)">{{ w.event }}</div>
           </div>
           <div style="padding:32px;display:flex;flex-direction:column;gap:20px;border-left:1px solid var(--color-divider)">
@@ -151,9 +148,7 @@ a:hover{color:var(--color-accent-900)}
             <sc-if value="{{ w.hasImage }}" hint-placeholder-val="{{ false }}">
               <div role="img" aria-label="{{ w.title }}" style="position:absolute;inset:0;background-image:{{ w.bgImage }};background-size:cover;background-position:center"></div>
             </sc-if>
-            <sc-if value="{{ w.noImage }}" hint-placeholder-val="{{ true }}">
-              <image-slot id="{{ w.slotId }}" shape="rect" placeholder="作品画像をドロップ"></image-slot>
-            </sc-if>
+            <div style="position:absolute;inset:0;background:var(--color-neutral-200)"></div>
             <div style="position:absolute;top:12px;left:12px;background:var(--color-bg);padding:5px 9px;font-size:11px;letter-spacing:.1em;color:var(--color-accent-800)">{{ w.event }}</div>
           </div>
           <div style="padding:22px;display:flex;flex-direction:column;gap:16px;flex:1">
@@ -195,12 +190,15 @@ a:hover{color:var(--color-accent-900)}
       <sc-for list="{{ researchItems }}" as="w" hint-placeholder-count="1">
         <article class="blueprint" style="display:flex;flex-direction:column">
           <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
-          <div style="position:relative;aspect-ratio:16/10;background:var(--color-neutral-200);border-bottom:1px solid var(--color-divider)">
-            <sc-if value="{{ w.hasImage }}" hint-placeholder-val="{{ false }}">
-              <div role="img" aria-label="{{ w.title }}" style="position:absolute;inset:0;background-image:{{ w.bgImage }};background-size:cover;background-position:center"></div>
+                    <div style="position:relative;aspect-ratio:16/10;background:var(--color-neutral-200);border-bottom:1px solid var(--color-divider);overflow:hidden">
+            <sc-if value="{{ w.hasImages }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex;width:100%;height:100%">
+                <div style="width:50%;height:100%;background-image:url({{ w.image1 }});background-size:cover;background-position:center"></div>
+                <div style="width:50%;height:100%;background-image:url({{ w.image2 }});background-size:cover;background-position:center"></div>
+              </div>
             </sc-if>
             <sc-if value="{{ w.noImage }}" hint-placeholder-val="{{ true }}">
-              <image-slot id="{{ w.slotId }}" shape="rect" placeholder="画像をドロップ"></image-slot>
+              <div style="position:absolute;inset:0;background:var(--color-neutral-200)"></div>
             </sc-if>
             <div style="position:absolute;top:12px;left:12px;background:var(--color-bg);padding:5px 9px;font-size:11px;letter-spacing:.1em;color:var(--color-accent-800)">{{ w.event }}</div>
           </div>
@@ -316,41 +314,41 @@ a:hover{color:var(--color-accent-900)}
 const WORKS = [
   { id: 'mitama', start: '2026-10-18', end: '', period: '2026.10 –', kind: 'コンテスト', event: 'alt.ctrl.GDC 2027 · 応募・審査待ち',
     title: 'Mitama: The Mouth of God', tagline: '食感だけを手がかりに遊ぶ VR ゲーム', after: 'MealBeBack',
-    summary: 'フォーク型の触覚コントローラを口に入れ、空気制御で生まれる食感から食べ物や生き物を生み出す。プレイヤーは村の神となり、首を振ってそれを村人に届ける。120秒のタイムアタック形式。',
+    summary: 'フォーク型の触覚コントローラを口に含み、空気圧で生まれる食感を手がかりに食べ物や生き物を識別するVRゲーム。プレイヤーは荒廃した村の神となり、口から生み出したものを首振りで村人に届ける。村の状態に合った食べ物・生き物を与え、村を復興させよう。120秒のタイムアタック形式。',
     tasks: { plan: ['「MealBeBack」をよりゲームらしい企画に変えるにあたり、アイデアの検討や、実現に向けた課題の整理を行いました。', '解決策はチームメンバーと共に議論し、固めていきました。'], design: ['メンバーが構築したシステムをもとに、山マップの地形デザイン案を考えました。', 'ゲーム段階ごとのマップ変化内容を決め、必要なオブジェクトを見繕いました。'], impl: ['山マップの作製、オブジェクト配置を行いました。', '他メンバーが担当したマップを統合し、調和の取れていない箇所を調整しました。', 'システム面のバグ修正を担当しました。'] },
     areas: [{ name: '山', note: 'デザイン・オブジェクト配置', own: true }, { name: '海', note: '微調整・統合', own: false }, { name: '村', note: '微調整・統合', own: false }, { name: '草原', note: '微調整・統合', own: false }],
     team: 5, teamLabel: '5名',
     tech: ['Unity', 'C#', 'Arduino', 'シリアル通信'],
     image: 'https://gdc.mikomiko-night.workers.dev/assets/world/village.jpg',
-    links: [{ label: 'プロジェクトサイト', url: 'https://gdc.mikomiko-night.workers.dev' }, { label: '制作の様子', url: 'https://gdc.mikomiko-night.workers.dev/making.html' }] },
+    links: [{ label: 'プロジェクトサイト', url: 'https://gdc.mikomiko-night.workers.dev' }, { label: 'GitHub', url: 'https://github.com/Fialuxe/MouthOfGod_System' }, { label: '制作の様子', url: 'https://gdc.mikomiko-night.workers.dev/making.html' }] },
   { id: 'mealbeback', start: '2026-06-06', end: '2026-09-07', period: '2026.06.06 – 09.07', kind: 'コンテスト', event: 'IVRC 2026 · 審査通過・会場展示',
     title: 'MealBeBack', tagline: '咀嚼を、逆再生する食育体験',
-    summary: '『日本書紀』の保食神(うけもちのかみ)は，口から飯や魚，獣を生み出して人をもてなしたと語られる．本企画では「口から食が生まれる」情景と，咀嚼の逆再生表現を重ね合わせ、食の背後にある生命に身体を通して触れる新たな食育体験を構築する．咀嚼に応じて口内の食べ物が物理的に復元・増加し，その原材料へと巻き戻り，体験者の口から生み出される. クイズ形式の体験として実装することで楽しめる食育コンテンツを目指す.',
-    tasks: { plan: ['体験者の口内に食べ物を送り出す体験のため、安全設計を前提として、企画段階から念入りに問題提起を行いました。'], design: ['デバイスとの通信処理、デバイス選択処理を中心にシステムを設計しました。ハードウェア設計のフォローも行いました。'], impl: ['シリアル通信の基盤を作成しました。他のメンバーが作成したコードをもとにデバッグを行い、バグを修正しました。'], show: ['予稿の添削と、会場での展示設営を行いました。'] },
+    summary: '『日本書紀』の保食神（うけもちのかみ）は、口から飯や魚、獣を生み出して人をもてなしたと語られる。本企画では「口から食が生まれる」情景と、咀嚼の逆再生表現を重ね合わせ、食の背後にある生命に身体を通して触れる新たな食育体験を構築する。咀嚼に応じて口内の食べ物が物理的に復元・増加し、その原材料へと巻き戻り、体験者の口から生み出される。クイズ形式の体験として実装することで楽しめる食育コンテンツを目指す。',
+    tasks: { plan: ['体験者の口内に食べ物を送り出す体験のため、安全設計に着目して、企画段階から念入りに問題提起を行いました。', '予稿（企画書）を編集しました。'], design: ['デバイスとの通信処理、デバイス選択処理を中心にシステムを設計しました。ハードウェア設計のフォローも行いました。'], impl: ['シリアル通信処理を実装しました。他のメンバーが作成したコードをもとにデバッグを行い、バグを修正しました。'], show: ['IVRC会場で設営、展示案内を行いました。', '後日、大学の要望を受け、構内でも展示しました。'] },
     tech: ['Unity', 'C#', 'Arduino', 'シリアル通信'],
     team: 5, teamLabel: '5名',
     image: 'https://img.youtube.com/vi/YFNzpdmrfdw/maxresdefault.jpg',
-    links: [{ label: 'YouTube', url: 'https://www.youtube.com/watch?v=YFNzpdmrfdw' }] },
+    links: [{ label: 'YouTube', url: 'https://www.youtube.com/watch?v=YFNzpdmrfdw' }, { label: 'GitHub', url: 'https://github.com/Fialuxe/MealBeBack' }] },
   { id: 'madeinuec', start: '2026-02-13', end: '2026-02-28', period: '2026.02.13 – 02.28', kind: 'サークル', event: '大学サークル',
-    title: 'Made in UEC', tagline: 'オムニバス形式の数秒勝負',
+    title: 'メイドインUEC', tagline: 'オムニバス形式の数秒勝負',
     summary: 'ごくわずかな制限時間でプレイするミニゲームが集合した、ハイスピードアクションゲーム。',
     tasks: { plan: ['大学のサークル・コミュニティで企画されたプロジェクトに参加し、その構成要素の一つであるミニゲーム「ウィンドウ」を企画しました。グループを結成しました。'], impl: ['仕事の分割、問題の明文化、進捗の確認、運営との相談を行い、プロトタイプを作成しました。'] },
     team: 30, teamLabel: '30名以上',
-    tech: ['Unity', 'C#'], image: '', links: [] },
+    tech: ['Unity', 'C#'], image: 'images/made_in_uec.png', links: [{ label: 'GitHub', url: 'https://github.com/kate1081021/made-in-UEC' }] },
   { id: 'mediamonster', start: '2024-12-01', end: '2025-02-19', period: '2024.12 – 2025.02', kind: '授業', event: '授業課題',
-    title: 'MediaMonster', tagline: 'ドットモンスターが戦う、通信コマンドバトル',
+    title: 'MEDIA MONSTER', tagline: 'ドットモンスターが戦う、通信コマンドバトル',
     summary: 'IPアドレスとポート番号指定による通信コマンドバトルゲーム',
     tasks: { plan: ['「ターン制でドット絵にしたい」というアイデアをもとに、通信方式の設定や Java で実装するうえでの課題をブラッシュアップし、具体的な実装段階まで落とし込みました。'], design: ['ターン制の通信処理について、ターンの遷移や処理の流れを設計しました。'], impl: ['通信処理を実装しました。その他の動作確認を行いました。'] },
     team: 3, teamLabel: '3名',
-    tech: ['Java'], image: '', links: [] },
+    tech: ['Java'], image: 'images/media_monster.png', links: [] },
 ];
 
 // ===== 研究の追加・編集はここ =====
 const RESEARCH = [
   { id: 'haptics', period: '2026.04 –', kind: '研究室', event: '広田研究室',
-    title: 'VR における触覚提示の研究', tagline: '振動刺激で足裏に摩擦感を提示する',
+    title: '振動刺激の遷移による足裏への摩擦感提示', tagline: '振動刺激で足裏に摩擦感を提示する',
     summary: '振動刺激で足裏に摩擦感を提示する研究を通じて、次の技術と知見を身につけました。',
-    image: '', tech: ['Unity', 'C#', 'Arduino', 'SteamVR', 'Vive Tracker'],
+    image: '', images: ['images/research_device.jpg', 'images/research_unity.png'], tech: ['Unity', 'C#', 'Arduino', 'SteamVR', 'Vive Tracker'],
     tasks: { plan: [], design: ['振動子を駆動する回路の設計・製作、回路と Unity をつなぐ信号制御の設計'],
       impl: ['VR で動作する Unity アプリケーションの開発。Vive Tracker を用いた位置計測'],
       show: [] }, links: [] },
@@ -385,7 +383,12 @@ class Component extends DCLogic {
       areaCells: (w.areas || []).map(a => ({ ...a, bg: a.own ? A : 'transparent', fg: a.own ? 'var(--color-bg)' : 'var(--color-accent-800)' })),
       teamDots: Array.from({ length: w.team || 0 }, (_, i) => i === 0 ? A : 'transparent') }));
         const others = WORKS.slice(2).map(base);
-    const researchItems = RESEARCH.map(base);
+    const researchItems = RESEARCH.map(r => ({
+      ...base(r),
+      hasImages: r.images && r.images.length > 1,
+      image1: r.images ? r.images[0] : '',
+      image2: r.images ? r.images[1] : '',
+    }));
     featured.forEach(f => { f.hasAfter = !!f.after; f.afterNote = f.after ? `IVRC2026「${f.after}」の後に制作` : ''; });
 
     const covered = PHASES.filter(([k]) => WORKS.some(w => w.tasks[k]?.length)).length;
