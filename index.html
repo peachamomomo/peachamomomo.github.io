@@ -89,7 +89,6 @@ a:hover{color:var(--color-accent-900)}
             <sc-if value="{{ w.hasImage }}" hint-placeholder-val="{{ false }}">
               <div role="img" aria-label="{{ w.title }}" style="position:absolute;inset:0;background-image:{{ w.bgImage }};background-size:cover;background-position:center"></div>
             </sc-if>
-            <div style="position:absolute;inset:0;background:var(--color-neutral-200)"></div>
             <div style="position:absolute;top:16px;left:16px;background:var(--color-bg);padding:6px 10px;font-size:11px;letter-spacing:.12em;color:var(--color-accent-800)">{{ w.event }}</div>
           </div>
           <div style="padding:32px;display:flex;flex-direction:column;gap:20px;border-left:1px solid var(--color-divider)">
@@ -148,7 +147,6 @@ a:hover{color:var(--color-accent-900)}
             <sc-if value="{{ w.hasImage }}" hint-placeholder-val="{{ false }}">
               <div role="img" aria-label="{{ w.title }}" style="position:absolute;inset:0;background-image:{{ w.bgImage }};background-size:cover;background-position:center"></div>
             </sc-if>
-            <div style="position:absolute;inset:0;background:var(--color-neutral-200)"></div>
             <div style="position:absolute;top:12px;left:12px;background:var(--color-bg);padding:5px 9px;font-size:11px;letter-spacing:.1em;color:var(--color-accent-800)">{{ w.event }}</div>
           </div>
           <div style="padding:22px;display:flex;flex-direction:column;gap:16px;flex:1">
@@ -193,8 +191,8 @@ a:hover{color:var(--color-accent-900)}
                     <div style="position:relative;aspect-ratio:16/10;background:var(--color-neutral-200);border-bottom:1px solid var(--color-divider);overflow:hidden">
             <sc-if value="{{ w.hasImages }}" hint-placeholder-val="{{ false }}">
               <div style="display:flex;width:100%;height:100%">
-                <div style="width:50%;height:100%;background-image:url(&quot;{{ w.image1 }}&quot;);background-size:cover;background-position:center"></div>
-                <div style="width:50%;height:100%;background-image:url(&quot;{{ w.image2 }}&quot;);background-size:cover;background-position:center"></div>
+                <div style="width:50%;height:100%;background-image:url('{{ w.image1 }}');background-size:cover;background-position:center"></div>
+                <div style="width:50%;height:100%;background-image:url('{{ w.image2 }}');background-size:cover;background-position:center"></div>
               </div>
             </sc-if>
             <sc-if value="{{ w.noImage }}" hint-placeholder-val="{{ true }}">
