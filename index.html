@@ -197,7 +197,9 @@ a:hover{color:var(--color-accent-900)}
             <sc-if value="{{ w.hasVideo }}" hint-placeholder-val="{{ false }}">
               <iframe src="{{ w.videoSrc }}" style="position:absolute;inset:0;width:100%;height:100%;border:none" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             </sc-if>
-
+            <sc-if value="{{ w.hasImage }}" hint-placeholder-val="{{ false }}">
+              <div role="img" aria-label="{{ w.title }}" style="position:absolute;inset:0;background-image:{{ w.bgImage }};background-size:cover;background-position:center"></div>
+            </sc-if>
             <sc-if value="{{ w.noImage }}" hint-placeholder-val="{{ true }}">
               <div style="position:absolute;inset:0;background:var(--color-neutral-200)"></div>
             </sc-if>
